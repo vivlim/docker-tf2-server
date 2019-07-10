@@ -19,6 +19,9 @@ docker run -p 27015:27015 -p 27015:27015/udp -it viviridian/tf2vintage
 # Run image with custom options
 mkdir -p cfg && chmod a+rw cfg && docker run -p 27015:27015 -p 27015:27015/udp -it viviridian/tf2vintage +sv_pure 2 +map ctf_2fort.bsp +maxplayers 32
 
-# Build image
+# Build image.
+# You will need to have a url to a TF2V mod package to extract inside the container as it is being built.
+# This avoids adding the size of the mod package to the final image.
+# If you have downloaded the package locally, use something like Python's SimpleHTTPServer to expose it.
 docker build . -t tf2vintage --build-arg TF2V_FULL_URL="https://<url>/TF2V_3.5R_Full.7z"
 ```
