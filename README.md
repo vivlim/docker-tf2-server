@@ -1,23 +1,21 @@
-## Team Fortress 2 + Docker
+## Team Fortress 2 Vintage + Docker
+
+A simple 
 
 ### Details:
-By default image is build with enabled autoupdate feature (take a look at `tf.sh` file).
-You can create new Dockerfile based on that image (FROM tf2 or FROM gonzih/tf2-server) and customize it with plugins, configs, CMD and ENTRYPOINT instructions.
+You can create a new Dockerfile based on this image (FROM viviridian/tf2-vintage-server) and customize it with plugins, configs, CMD and ENTRYPOINT instructions.
 
 ```shell
-# Run using image hosted on the docker hub
+# Run image with persistent config (or use start.sh).
+# ./cfg will be created on first run.
+mkdir -p cfg && chmod a+rw cfg && docker run -p 27015:27015 -p 27015:27015/udp -it -v "$(pwd)"/cfg:/home/tf2/hlserver/source2013dedi/tf2vintage/cfg:rw viviridian/tf2vintage
 
-docker run -d -p 27015:27015/udp gonzih/tf2-server
-
-# Build image and tag it as tf2
-docker build -t tf2 github.com/Gonzih/docker-tf2-server
-
-# Run image with default options (CMD in Dockerfile)
-docker run -d -p 27015:27015/udp tf2
+# Run without persistent config
+docker run -p 27015:27015 -p 27015:27015/udp -it viviridian/tf2vintage
 
 # Run image with custom options
-docker run -d -p 27015:27015/udp tf2 +sv_pure 2 +map ctf_2fort.bsp +maxplayers 32
+mkdir -p cfg && chmod a+rw cfg && docker run -p 27015:27015 -p 27015:27015/udp -it viviridian/tf2vintage +sv_pure 2 +map ctf_2fort.bsp +maxplayers 32
 
-# Run image with custom config
-docker run -d -p 27015:27015/udp -v ~/server.cfg:/home/tf2/hlserver/tf2/tf/cfg/server.cfg:ro tf2
+# Build image
+docker build . -t tf2vintage --build-arg TF2V_FULL_URL="https://<url>/TF2V_3.5R_Full.7z"
 ```

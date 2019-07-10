@@ -1,0 +1,4 @@
+login anonymous
+force_install_dir ./source2013dedi/
+app_update 244310 validate
+quit
