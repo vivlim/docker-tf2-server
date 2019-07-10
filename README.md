@@ -6,7 +6,7 @@ A basic server for [Team Fortress 2 Vintage](https://www.moddb.com/mods/team-for
 
 Follow [these instructions](https://www.moddb.com/mods/team-fortress-2-vintage/news/installing-tf2v1) to set up a client you can use to connect.
 
-If you choose to download the image from Docker Hub instead of building it yourself, be warned that it is **very large**, around 13GB at the time of writing this.
+If you choose to download [the image from Docker Hub](https://cloud.docker.com/u/viviridian/repository/docker/viviridian/tf2vintage) instead of building it yourself, be warned that it is **very large**, around 13GB at the time of writing this.
 
 ```shell
 # Run image with persistent config (or use start.sh).
